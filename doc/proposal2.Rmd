@@ -1,0 +1,166 @@
+---
+title: "Data Incubator Project Proposal"
+author: "Robert Handsfield"
+date: "04/10/2015"
+output: html_document
+---
+
+Written in R markdown
+
+Correlate real estate prices to natural disasters.
+
+
+```{r}
+library("data.table");
+library("dplyr");
+library("ggplot2");
+library("reshape");
+```
+
+
+The weather dataset, codebooks, and supplementary information may be found at the following links.
+This analysis was performed on the NOAA Storm Data Set obtained on **February 2^nd^, 2015**.
+
+* NOAA [Storm Data Set](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2)
+* Storm Data [Documentation](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf)
+* NCDC Storm Events [FAQ](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2FNCDC%20Storm%20Events-FAQ%20Page.pdf)
+* Proprietary [Codebook](https://ire.org/nicar/database-library/databases/storm-events/) from IRE
+* [Revisions](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf) to the data set
+
+```{r downloadSource, echo=TRUE, cache=TRUE, eval=FALSE}
+# Download the file
+fileUrl <-"https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2";
+
+if ( !("Stormdata.csv.bz2" %in% list.files()) ) {
+	download.file(fileUrl, destfile = "./Stormdata.csv.bz2", method = "curl" );
+}
+```  
+
+```{r eval=FALSE}
+file <- "../datasciencecoursera/5-reproducibleResearch/courseProject2/Stormdata.csv.bz2";
+tmp <- bzfile(file);
+dfStorm <- read.csv(tmp);
+```
+
+```{r}
+dt <- data.table(dfStorm);
+
+dt$BGN_DATE <- as.Date(dt$BGN_DATE, format= "%m/%d/%Y");
+
+#dt$BGN_DATE[1] < 2003;
+
+nrow( dt[BGN_DATE < 1980,] );
+
+# subset events that cause housing damage: tornado, flood, hurricane, wildfire
+storm.kind <- c(unique(dt$EVTYPE)[ grep("WILDFIRE", unique(dt$EVTYPE))],
+		unique(dt$EVTYPE)[ grep("TORNADO", unique(dt$EVTYPE))],
+		unique(dt$EVTYPE)[ grep("HURRICANE", unique(dt$EVTYPE))]
+		);
+
+```
+
+```{r}
+# subset events that cause housing damage: tornado, flood, hurricane, wildfire
+
+# create list of storm events
+storm.kind <- c(grep("FIRE", unique(dt$EVTYPE)),
+		grep("TORNADO", unique(dt$EVTYPE)),
+		grep("HURRICANE", unique(dt$EVTYPE)),
+		grep("FLOOD", unique(dt$EVTYPE))
+		);
+
+# convert indexes to names (factors)
+storm.kind <- unique(dt$EVTYPE)[storm.kind];
+
+dt <- dt[EVTYPE %in% storm.kind,];
+dt$EVTYPE <- factor(dt$EVTYPE); # remove extraneous factors
+
+# subset continental U.S.
+state.list <- c('AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY');
+
+dt <- dt[STATE %in% state.list];
+dt$STATE <- factor(dt$STATE); # remove extraneous factors
+
+# real estate data available from 2009
+dt <- dt[BGN_DATE > 2008];
+
+# create state.county factor
+dt$state.county <- paste(dt$STATE, dt$COUNTYNAME, sep=".");
+
+tbl <- table(dt$state.county)
+
+which(tbl == max(tbl));
+
+sort(tbl, decreasing=TRUE )[1:100];
+
+top100 <- names( sort(tbl, decreasing=TRUE )[1:100]);
+```
+
+
+Harris County TX (Houston) is 4^th^ on the list of counties with highest incidence of fires, floods, tornadoes, or hurricanes.
+
+```{r}
+# subset to harris county
+dt.harris <- dt[state.county == "TX.HARRIS", ];
+
+# subset to 2009
+dt.harris.09 <- dt.harris[BGN_DATE > "2009-10-01",];
+event <- dt.harris.09$BGN_DATE;
+
+ggplot(dt.harris) + aes(x=BGN_DATE) + geom_bar(stat="bin") + ggtitle("Frequency of Natural Disasters in Harris County, TX");
+```
+
+
+
+---------------------------------------------
+
+Obtain real estate statistics for Harris county, TX, via the Trulia API:
+
+http://api.trulia.com/webservices.php?library=TruliaStats&function=getCountyStats&county=Harris&state=TX&startDate=1950-01-03&endDate=2011-11-03&apikey=wwccxrp5983jhuaxj278fpbt
+
+```{r}
+# real estate data parsed and saved to 'harris2.csv'
+
+harris <- data.table(read.csv("data/harris2.csv")[1:4]);
+harris$week.ending <- as.Date(harris$week.ending, format="%Y-%m-%d");
+
+re.harris <- data.frame(harris);
+
+tmp1 <- data.frame(re.harris$week.ending); 
+tmp1$value <-  re.harris$num.props;
+tmp1$measurement <- "properties listed";
+
+tmp2 <- data.frame(re.harris$week.ending);
+tmp2$value <-  re.harris$med.price;
+tmp2$measurement <- "median price";
+
+tmp3 <- data.frame(re.harris$week.ending);
+tmp3$value <-  re.harris$avg.price;
+tmp3$measurement <- "mean price";
+
+re.harris2 <- rbind(tmp1, tmp2, tmp3);
+names(re.harris2)[1] <- "week.ending";
+
+```
+
+```{r}
+
+ggplot(re.harris2) + aes(x=week.ending, y=value, color=measurement) + geom_line() + 
+	scale_fill_continuous(guide = "legend") + 
+	geom_point(aes(x = event[1], y=3e05), color="black") + 
+	geom_point(aes(x = event[2], y=3e05), color="black") +
+	geom_point(aes(x = event[3], y=3e05), color="black") +
+	geom_point(aes(x = event[4], y=3e05), color="black") +
+	geom_point(aes(x = event[5], y=3e05), color="black") +
+	geom_point(aes(x = event[6], y=3e05), color="black") +
+	geom_point(aes(x = event[7], y=3e05), color="black") +
+	geom_point(aes(x = event[8], y=3e05), color="black") +
+	geom_point(aes(x = event[9], y=3e05), color="black") +
+	geom_point(aes(x = event[10], y=3e05), color="black") + 
+	ggtitle("Real Estate Prices and Natural Disasters for Harris County, TX");
+
+```
+
+By week, the number of listed properties is shown in green, the median listing price in red, and the average listing price in blue. Disasters- floods, tornadoes, etc, are plotted as black dots on the date they occurred.
+
+It's unclear whether this small sample shows a correlation.  The topic is worthy of further investigation.

@@ -1,0 +1,30 @@
+---
+title: "Data Incubator Project Proposal"
+author: "Robert Handsfield"
+date: "04/10/2015"
+output: html_document
+---
+
+Correlate social media mentions of Katrina to market volatility preceding hurricane Katrina
+
+
+Aug 23 2005 - Aug 31 2005
+
+Landfall Aug 25,29
+
+Timelines:
+http://news.nationalgeographic.com/news/2005/09/0914_050914_katrina_timeline.html
+https://en.wikipedia.org/wiki/Timeline_of_Hurricane_Katrina
+
+----------------------------------
+Problem: There are millions of mobile apps available in the stores. These apps are difficult to curate; search functions are poor, and people may not find an app they would use.
+
+Solution: Natural language processing of group chat in FB/Twitter to match group interests and activity to mobile applications.
+
+
+Data Sources:
+
+```{r}
+
+```
+

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://www.thedataincubator.com/challenge.html -->
+<html lang="en" itemscope="" itemtype="http://schema.org/Organization" class="linux chrome chrome4 webkit webkit5 js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    
+    <script async="" src="./The Data Incubator_files/analytics.js"></script><script type="text/javascript" src="./The Data Incubator_files/assets.js" defer=""></script>
+    
+
+		
+		
+		<!-- Basic Page Needs
+		================================================== -->
+		<meta charset="utf-8">
+    <title>The Data Incubator  </title>
+		<meta name="description" content="A 7 week fellowship training and placing advanced-degree data scientists and quants.">
+		<meta name="author" content="The Data Incubator">
+		<!-- For Google Plus sharing -->
+		<meta itemprop="name" content="The Data Incubator">
+		<meta itemprop="description" content="A 7 week fellowship training and placing advanced-degree data scientists and quants.">
+		<meta itemprop="image" content="http://www.thedataincubator.com/static/images/theme-pics/big-city-2.jpg">
+		<meta property="og:title" content="The Data Incubator">
+		<meta property="og:image" content="http://www.thedataincubator.com/static/images/theme-pics/big-city-2.jpg">
+		<meta property="og:description" content="A 7 week fellowship training and placing advanced-degree data scientists and quants.">
+		<!-- Mobile Specific Metas
+		================================================== -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<!-- CSS
+		================================================== -->
+		<!-- Bootstrap  -->
+    
+    <link type="text/css" id="colors" rel="stylesheet" href="./The Data Incubator_files/styles.css">
+    
+    <!-- web font  -->
+    <link href="./The Data Incubator_files/css" rel="stylesheet" type="text/css">
+		
+<link rel="stylesheet" type="text/css" href="./The Data Incubator_files/application.css">
+
+		<!-- Favicons
+		================================================== -->
+		<link rel="shortcut icon" href="https://www.thedataincubator.com/static/images/chart-outline.ico">
+	<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">.MathJax_Preview .MJXc-math {color: inherit!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXc-script {font-size: .8em}
+.MJXc-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXc-bold {font-weight: bold}
+.MJXc-italic {font-style: italic}
+.MJXc-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-largeop {font-size: 150%}
+.MJXc-largeop.MJXc-int {vertical-align: -.2em}
+.MJXc-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXc-display {display: block; text-align: center; margin: 1em 0}
+.MJXc-math span {display: inline-block}
+.MJXc-box {display: block!important; text-align: center}
+.MJXc-box:after {content: " "}
+.MJXc-rule {display: block!important; margin-top: .1em}
+.MJXc-char {display: block!important}
+.MJXc-mo {margin: 0 .15em}
+.MJXc-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXc-denom {display: inline-table!important; width: 100%}
+.MJXc-denom > * {display: table-row!important}
+.MJXc-surd {vertical-align: top}
+.MJXc-surd > * {display: block!important}
+.MJXc-script-box > *  {display: table!important; height: 50%}
+.MJXc-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXc-script-box > *:last-child > * {vertical-align: bottom}
+.MJXc-script-box > * > * > * {display: block!important}
+.MJXc-mphantom {visibility: hidden}
+.MJXc-munderover {display: inline-table!important}
+.MJXc-over {display: inline-block!important; text-align: center}
+.MJXc-over > * {display: block!important}
+.MJXc-munderover > * {display: table-row!important}
+.MJXc-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXc-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXc-mtr {display: table-row!important}
+.MJXc-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXc-mtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-mlabeledtr {display: table-row!important}
+.MJXc-mlabeledtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mlabeledtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXc-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXc-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXc-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXc-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXc-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXc-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXc-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXc-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXc-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXc-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_CHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Main; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Main-bold; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Main-italic; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Math-italic; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Caligraphic; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Size1; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Size2; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Size3; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?rev=2.5.1') format('opentype')}
+@font-face {font-family: MathJax_Size4; src: url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?rev=2.5.1') format('woff'), url('https://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?rev=2.5.1') format('opentype')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+	<body data-spy="scroll" data-target="#scrollTarget" data-offset="150" id="fullScreen"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+		<!-- Preloader -->
+		<div id="preloader" style="display: none;">
+			<div id="status" style="display: none;">
+				<h1 class="noSubtitle"><i class="icon-chart-outline"></i>The Data Incubator</h1>
+			</div>
+		</div>
+		<!-- Preloader -->
+		<!-- Primary Page Layout
+		================================================== -->
+		<!-- globalWrapper -->
+		
+	<div id="paralaxSlice5" data-stellar-background-ratio="0.5" style="background-image: url(https://www.thedataincubator.com/static/images/theme-pics/capitol-building.jpg);">
+		<div class="maskParent">
+			<div class="paralaxMask"></div>
+			<div class="paralaxText container">
+				<i class="icon-looped-square-outline iconBig"></i>
+				<blockquote class="bigTitle">Data Scientist: The Sexiest Job<br>of the 21st Century<br><small>HARVARD BUSINESS REVIEW</small></blockquote>
+			</div>
+		</div>
+	</div>
+
+<section class="slice" id="apply">
+	<div class="hi">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1 class="noSubtitle">Challenge</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<p>Please answer as many questions as you can.  We do not expect you to answer all the questions (they are mostly optional) but answering more questions correctly will help you.  This should take 3-4 hours but you are welcome to take more time if it would help.  (<sup>*</sup>) denotes an optional field.
+					</p>
+
+					<div class="alert alert-info" role="alert"><p><strong>Want to get a head start on being a data scientist?</strong>  We want all semifinalists to get as much out of the challenge questions as possible.  So we've written two <a href="http://blog.thedataincubator.com/2015/01/processing-data-like-a-professional-data-scientist/">blog</a> <a href="http://blog.thedataincubator.com/2015/01/a-cs-degree-for-data-science-part-i-efficient-numerical-computation/">posts</a> that might get you thinking about mathematics and computation differently.  They might also give you a head start on solving the challenge questions.  Consider following our <a href="http://blog.thedataincubator.com/">blog</a> for more about becoming a data scientist!</p></div>
+
+					<div class="alert alert-info" role="alert"><p>If you are having browser troubles, we recommend using Chrome.  You can resubmit your answers on this form as often as you would like.  Only the latest submission will be considered.</p></div>
+
+					<div class="alert alert-warning" role="alert"><p>We realize some questions are ambiguous.  Most real-world questions are.  This is a test of whether you can prioritize important effects and combine real-world knowledge with theory.</p></div>
+
+					<div class="alert alert-warning" role="alert"><p>Due to the volume of requests, we will only accept submissions via this form.</p></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <form class="form-horizontal" role="form" id="challengeForm" action="https://www.thedataincubator.com/challengeSubmit">
+						<div class="row">
+							<div class="col-xs-12 mt30">
+                 <p><strong>Q1:</strong> 
+  You roll a fair 6-sided dice iteratively until the sum of the dice rolls is greater than or equal to <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-1-Frame"><nobr><span class="math" id="MathJax-Span-1" role="math" style="width: 1.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.06em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.003em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1">M</script>.
+  </p>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceMeanSum20" class="control-label left-align">What is the mean of the sum minus <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame"><nobr><span class="math" id="MathJax-Span-4" role="math" style="width: 1.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.06em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.003em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2">M</script> when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame"><nobr><span class="math" id="MathJax-Span-7" role="math" style="width: 4.474em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.416em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-8"><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-10" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main; padding-left: 0.291em;">20</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-3">M = 20</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceMeanSum20" name="diceMeanSum20" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceMeanSum20-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceStdSum20" class="control-label left-align">What is the standard deviation of the sum minus <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame"><nobr><span class="math" id="MathJax-Span-12" role="math" style="width: 1.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.06em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-13"><span class="mi" id="MathJax-Span-14" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.003em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-4">M</script> when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-5-Frame"><nobr><span class="math" id="MathJax-Span-15" role="math" style="width: 4.474em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.416em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-16"><span class="mi" id="MathJax-Span-17" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-18" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-19" style="font-family: MathJax_Main; padding-left: 0.291em;">20</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-5">M = 20</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceStdSum20" name="diceStdSum20" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceStdSum20-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceMeanSum10000" class="control-label left-align">What is the mean of the sum minus <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-6-Frame"><nobr><span class="math" id="MathJax-Span-20" role="math" style="width: 1.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.06em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-21"><span class="mi" id="MathJax-Span-22" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.003em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-6">M</script> when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-7-Frame"><nobr><span class="math" id="MathJax-Span-23" role="math" style="width: 6.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.906em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-24"><span class="mi" id="MathJax-Span-25" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-26" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-27" style="font-family: MathJax_Main; padding-left: 0.291em;">10000</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-7">M = 10000</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceMeanSum10000" name="diceMeanSum10000" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceMeanSum10000-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceStdSum10000" class="control-label left-align">What is the standard deviation of the sum minus <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-8-Frame"><nobr><span class="math" id="MathJax-Span-28" role="math" style="width: 1.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.06em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-29"><span class="mi" id="MathJax-Span-30" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.003em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-8">M</script> when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-9-Frame"><nobr><span class="math" id="MathJax-Span-31" role="math" style="width: 6.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.906em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-32"><span class="mi" id="MathJax-Span-33" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-34" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-35" style="font-family: MathJax_Main; padding-left: 0.291em;">10000</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-9">M = 10000</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceStdSum10000" name="diceStdSum10000" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceStdSum10000-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceMeanRoll20" class="control-label left-align">What is the mean of the number of rolls when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-10-Frame"><nobr><span class="math" id="MathJax-Span-36" role="math" style="width: 4.474em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.416em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-37"><span class="mi" id="MathJax-Span-38" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-39" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-40" style="font-family: MathJax_Main; padding-left: 0.291em;">20</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-10">M = 20</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceMeanRoll20" name="diceMeanRoll20" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceMeanRoll20-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceStdRoll20" class="control-label left-align">What is the standard deviation of the number of rolls when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-11-Frame"><nobr><span class="math" id="MathJax-Span-41" role="math" style="width: 4.474em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.416em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-42"><span class="mi" id="MathJax-Span-43" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-44" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-45" style="font-family: MathJax_Main; padding-left: 0.291em;">20</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-11">M = 20</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceStdRoll20" name="diceStdRoll20" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceStdRoll20-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceMeanRoll10000" class="control-label left-align">What is the mean of the number of rolls when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-12-Frame"><nobr><span class="math" id="MathJax-Span-46" role="math" style="width: 6.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.906em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-47"><span class="mi" id="MathJax-Span-48" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-49" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-50" style="font-family: MathJax_Main; padding-left: 0.291em;">10000</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-12">M = 10000</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceMeanRoll10000" name="diceMeanRoll10000" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceMeanRoll10000-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceStdRoll10000" class="control-label left-align">What is the standard deviation of the number of rolls when <span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-13-Frame"><nobr><span class="math" id="MathJax-Span-51" role="math" style="width: 6.397em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.906em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.175em 1000.002em 4.137em -999.998em); top: -3.988em; left: 0.002em;"><span class="mrow" id="MathJax-Span-52"><span class="mi" id="MathJax-Span-53" style="font-family: MathJax_Math-italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.099em;"></span></span><span class="mo" id="MathJax-Span-54" style="font-family: MathJax_Main; padding-left: 0.291em;">=</span><span class="mn" id="MathJax-Span-55" style="font-family: MathJax_Main; padding-left: 0.291em;">10000</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span><span style="border-left-width: 0.003em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.066em; vertical-align: -0.059em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-13">M = 10000</script>?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="diceStdRoll10000" name="diceStdRoll10000" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="diceStdRoll10000-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 mt5">
+							  <div class="row form-group">
+								<div class="col-xs-12">
+									<label for="diceCode">Please provide the script used to generate this result (max 10000 characters).<sup>*</sup></label>
+									<textarea id="diceCode" name="diceCode" class="form-control allowtab" rows="6" maxlength="10000">                  </textarea>
+								</div>
+							</div>
+							  <p>In what language is the script written?<sup>*</sup></p>
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_c" name="diceLanguage" value="c">
+          C/C++
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_fortran" name="diceLanguage" value="fortran">
+          Fortran
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_idl" name="diceLanguage" value="idl">
+          IDL
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_java" name="diceLanguage" value="java">
+          Java
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_matlab" name="diceLanguage" value="matlab">
+          Matlab
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_perl" name="diceLanguage" value="perl">
+          Perl
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_python" name="diceLanguage" value="python">
+          Python
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_r" name="diceLanguage" value="r">
+          R
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_stata" name="diceLanguage" value="stata">
+          Stata
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_sql" name="diceLanguage" value="sql">
+          SQL
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_vba" name="diceLanguage" value="vba">
+          VBA
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="diceLanguage_other" name="diceLanguage" value="other">
+          Other
+      </label>
+    </div>
+  </div>
+			</div>
+		</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 mt30">
+								<p><strong>Q2:</strong> The files <a href="https://nyctaxitrips.blob.core.windows.net/data/trip_data_3.csv.zip">trip_data_3.csv.zip</a> and <a href="https://nyctaxitrips.blob.core.windows.net/data/trip_fare_3.csv.zip">trip_fare_3.csv.zip</a> contain travel and fare data for NYC taxicabs in March 2013.  A snippet from the files looks like this</p>
+<pre>5D7054D121F7AFEF5D67FD93AB1DF05E,3DD058605BB5583F4484CE64D7AC57D9,CMT,1,N,2013-03-01 00:00:09,2013-03-01 00:26:34,4,1584,5.40,-73.986534,40.734962,-73.975365,40.67527
+213C1F221955A2823F4AFC8A65A951AC,6AE0CCB3191A4354FDF1AAF377ACFD15,CMT,1,N,2013-03-01 00:00:17,2013-03-01 00:16:04,1,946,3.90,-73.988701,40.73122,-73.95739,40.722301
+5EE2C4D3BF57BDB455E74B03B89E43A7,79EFAD78E0A81463C273B1CF7A8D3583,CMT,1,N,2013-03-01 00:00:28,2013-03-01 00:24:28,1,1438,9.40,-73.973839,40.752171,-73.958481,40.653683
+3D14197B6B792B6CE2B1D34E916A81AE,434A5F0C3E2405DF2F5450B146EABE6E,CMT,1,N,2013-03-01 00:00:33,2013-03-01 00:12:00,1,687,3.50,-74.003777,40.723763,-73.995758,40.764538
+F235E92D0522C9BB25DA3767BE919705,5C8C81864C3CFDB140FF9F6C25E1DBF7,CMT,1,N,2013-03-01 00:00:34,2013-03-01 00:15:23,1,889,7.40,-73.986382,40.749817,-73.94371,40.835423
+</pre>
+<p>and this, respectively</p>
+<pre>D30BED60331C79E3F7ACD05B325ED42F,E0F3F8A7AE1B8DCCE0C0BA42FFBA4610,CMT,2013-03-01 00:05:48,CRD,10.5,0.5,0.5,2.3,0,13.8
+D886C7DC412D236CF1797D4B5BC90DDB,9B87622D5FD8A9F31C61FBA3C04DF8AD,CMT,2013-03-01 00:05:55,CRD,52,0,0.5,13.8,16.5,82.8
+049DC01A4AC7D474B94393E642561A3B,AE30D3668D5E76CF4C24E2FF6432F17B,CMT,2013-03-01 00:06:02,CRD,12.5,0.5,0.5,1.8,0,15.3
+A28B5AE58590D2ADF1D9A709D80B2984,3B681501AFD2BED5E0FF8F075C6E56E5,CMT,2013-03-01 00:06:09,CRD,8.5,0.5,0.5,1.5,0,11
+3E5703FEDCBD06883431F9A52AEF6796,1D8EE84A1578FBB1F4AF455225649677,CMT,2013-03-01 00:06:17,CRD,5.5,0.5,0.5,1.62,0,8.12
+</pre>
+<p>The headers are contained in the files and are fairly self-explanatory, although some things will have to be inferred from the data.  When working with this file, be sure to get rid of "bad" datapoints.  All monetary quantities in these questions are in units of dollars.
+</p>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiFractionCCUnder5" class="control-label left-align">What fraction of payments under $5 use a credit card <sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiFractionCCUnder5" name="taxiFractionCCUnder5" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiFractionCCUnder5-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiFractionCCOver50" class="control-label left-align">What fraction of payments over $50 use a credit card<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiFractionCCOver50" name="taxiFractionCCOver50" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiFractionCCOver50-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiMeanFarePerMinute" class="control-label left-align">What is the mean fare per minute driven?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiMeanFarePerMinute" name="taxiMeanFarePerMinute" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiMeanFarePerMinute-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiMedianFarePerMile" class="control-label left-align">What is the median of the taxi's fare per mile driven?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiMedianFarePerMile" name="taxiMedianFarePerMile" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiMedianFarePerMile-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiPercentileMilePerHour" class="control-label left-align">What is the 95 percentile of the taxi's average driving speed in miles per hour?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiPercentileMilePerHour" name="taxiPercentileMilePerHour" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiPercentileMilePerHour-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiDistanceRatio" class="control-label left-align">What is the average ratio of the distance between the pickup and dropoff divided by the distance driven?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiDistanceRatio" name="taxiDistanceRatio" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiDistanceRatio-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiJFKTip" class="control-label left-align">What is the average tip for rides from JFK?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiJFKTip" name="taxiJFKTip" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiJFKTip-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiMarchRevenue" class="control-label left-align">What is the median March revenue of a taxi driver?<sup>*</sup></label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="taxiMarchRevenue" name="taxiMarchRevenue" maxlength="200" placeholder=".1">
+                  <div class="error-text" id="taxiMarchRevenue-error-text">
+                  </div>
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 mt5">
+						  <div class="row form-group">
+								<div class="col-xs-12">
+									<label for="taxiCode">Please provide the script used to generate this result (max 10000 characters).<sup>*</sup></label>
+									<textarea id="taxiCode" name="taxiCode" class="form-control allowtab" rows="6" maxlength="10000">                  </textarea>
+								</div>
+							</div>
+						  <p>In what language is the script written?<sup>*</sup></p>
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_c" name="taxiLanguage" value="c">
+          C/C++
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_fortran" name="taxiLanguage" value="fortran">
+          Fortran
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_idl" name="taxiLanguage" value="idl">
+          IDL
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_java" name="taxiLanguage" value="java">
+          Java
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_matlab" name="taxiLanguage" value="matlab">
+          Matlab
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_perl" name="taxiLanguage" value="perl">
+          Perl
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_python" name="taxiLanguage" value="python">
+          Python
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_r" name="taxiLanguage" value="r">
+          R
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_stata" name="taxiLanguage" value="stata">
+          Stata
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_sql" name="taxiLanguage" value="sql">
+          SQL
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_vba" name="taxiLanguage" value="vba">
+          VBA
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="taxiLanguage_other" name="taxiLanguage" value="other">
+          Other
+      </label>
+    </div>
+  </div>
+			</div>
+		</div>
+						  </div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 mt30">
+								<p><strong>Q3:</strong> Propose a project to do while at The Data Incubator.  We want to know about your ability to think at a high level.  Try to think of projects that users or businesses will care about (as opposed to academic projects that only researchers will care about).  The project does not have to be 100% completely novel.  Here are some useful links about data sources on our blog (<a href="http://blog.thedataincubator.com/2014/10/data-sources-for-cool-data-science-projects-part-1/">Post 1</a> and <a href="http://blog.thedataincubator.com/2014/10/data-sources-for-cool-data-science-projects-part-2/">Post 2</a>).</p>
+								<p>Propose a project that uses a large, publically accessible dataset.  The most impressive proposals crawl non-obvious data sources or have downloaded messy, multigigabyte, public data sources.  Projects using pre-cleaned, pre-formatted data meant for machine-learning are not as impressive.  Motivate the problem you are tackling, discuss the data source(s) you are using, and explain the the analysis you are performing.  Do enough exploratory data analysis to convince one the project is viable and generate two interesting non-trivial plots.  Explain the pots and give url links to those plots.</p>
+
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="projectProposal">Propose a project.</label>
+									<textarea id="projectProposal" name="projectProposal" class="form-control" rows="5" maxlength="10000" required="">                  </textarea>
+								</div>
+							</div>
+								<div class="row form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="Make sure you make your links publicly accessible">
+								<div class="col-xs-12">
+									<label for="projectDataSourceLink" class="control-label left-align">Link to public description of data source.</label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="projectDataSourceLink" name="projectDataSourceLink" maxlength="200" placeholder="http://blog.thedataincubator.com/2014/10/data-sources-for-cool-data-science-projects-part-1/" required="">
+                  <div class="error-text" id="projectDataSourceLink-error-text">
+                  </div>
+                </div>
+							</div>
+
+								<div class="row form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="Make sure you make your links publicly accessible">
+								<div class="col-xs-12">
+									<label for="projectPlot1" class="control-label left-align">Link to 1st plot.  Bonus points if you use a <a href="https://www.heroku.com/">Heroku apps domain</a> for your hosting.</label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="projectPlot1" name="projectPlot1" maxlength="200" placeholder="http://example.herokuapp.com/index.html" required="">
+                  <div class="error-text" id="projectPlot1-error-text">
+                  </div>
+                </div>
+							</div>
+
+								<div class="row form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="Make sure you make your links publicly accessible">
+								<div class="col-xs-12">
+									<label for="projectPlot2" class="control-label left-align">Link to 2nd plot.  Bonus points if you use a <a href="https://www.heroku.com/">Heroku apps domain</a> for your hosting.</label>
+								</div>
+								<div class="col-xs-12">
+									<input type="text" class="form-control" id="projectPlot2" name="projectPlot2" maxlength="200" placeholder="http://example.herokuapp.com/index.html" required="">
+                  <div class="error-text" id="projectPlot2-error-text">
+                  </div>
+                </div>
+							</div>
+
+							</div>
+							<div class="col-xs-12 mt15">
+								<p>We want to know your communication style.  Record a video of yourself giving a high-level proposal of your project to a non-technical person.  The video should be no longer than 1 minute and should be at a higher level than the previous explanation.</p>
+								<p>Record a video of yourself <a href="https://www.youtube.com/my_webcam">here</a> and upload it to Youtube (and not another video hosting service).  Be sure to make the video unlisted (but not private!) so people without the link cannot find it on Google (go <a href="https://www.youtube.com/my_videos">here</a>, click "Edit" on your video, <a href="https://www.thedataincubator.com/static/images/youtube-unlisted.png">select unlisted from the privacy dropdown menu</a>, and save your changes).  You can use either your webcam or a smartphone.</p>
+								<div class="row form-group" data-toggle="tooltip" data-placement="top" title="" data-original-title="Please provide a youtube link">
+								<div class="col-xs-12">
+									<label for="video">Please provide a standard link to your video on Youtube (i.e. something of the form https://www.youtube.com/watch?v=ab_Cde, or http://youtu.be/ab_Cde).</label>
+									<input type="url" class="form-control" id="video" name="video" placeholder="https://www.youtube.com/watch?v=C9Dlgu2Lm6U" required="" pattern="(?:https?:\/\/(?:www\.)?youtube.com/watch\?v=.*)|(?:https?:\/\/youtu.be\/.+)">
+								</div>
+                <div class="error-text" id="video-error-text">
+                </div>
+							</div>
+							</div>
+							<div class="col-xs-12 mt15">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="projectCode">Please provide the script used to generate this result (max 10000 characters).</label>
+									<textarea id="projectCode" name="projectCode" class="form-control allowtab" rows="6" maxlength="10000" required="">                  </textarea>
+								</div>
+							</div>
+								<p>In what language is the script written?<sup>*</sup></p>
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_c" name="projectLanguage" value="c">
+          C/C++
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_fortran" name="projectLanguage" value="fortran">
+          Fortran
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_idl" name="projectLanguage" value="idl">
+          IDL
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_java" name="projectLanguage" value="java">
+          Java
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_matlab" name="projectLanguage" value="matlab">
+          Matlab
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_perl" name="projectLanguage" value="perl">
+          Perl
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_python" name="projectLanguage" value="python">
+          Python
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_r" name="projectLanguage" value="r">
+          R
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_stata" name="projectLanguage" value="stata">
+          Stata
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_sql" name="projectLanguage" value="sql">
+          SQL
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_vba" name="projectLanguage" value="vba">
+          VBA
+      </label>
+    </div>
+  </div>
+			</div>
+			<div class="col-xs-3">
+				<div class="row">
+    <div class="col-xs-12">
+      <label class="nobold">
+        <input type="radio" id="projectLanguage_other" name="projectLanguage" value="other">
+          Other
+      </label>
+    </div>
+  </div>
+			</div>
+		</div>
+							</div>
+
+							<!-- Misc -->
+							<div class="col-xs-12 mt30">
+								<div class="row form-group">
+								<div class="col-xs-12">
+									<label for="time">For future challenge questions, how many hours did it take you to complete this challenge?  This will not be considered in your application (please just enter a number).</label>
+									<input type="number" class="form-control" id="time" name="time" required="" placeholder="9999">
+								</div>
+                <div class="error-text" id="time-error-text">
+                </div>
+							</div>
+							</div>
+
+							<div class="col-xs-12 mt15">
+								<div class="checkbox">
+								<label>
+                  <input type="checkbox" id="own" name="own" value="own" required="">
+										By submitting this form, you certify that your answers are the result of your own work and not copied from another individual or source.
+								</label>
+							</div>
+								<input id="email" name="email" type="hidden">
+								<input id="code" name="code" type="hidden">
+								<input id="session" name="session" type="hidden" value="201506">
+								<div class="form-group text-center mt15">
+									<button id="submit-button" type="submit" class="btn btn-default">Submit</button>
+								</div>
+							</div>
+            </div>
+
+            <div id="formSubmitSuccess" class="formSubmitStatus row mt30" style="display: none;">
+              <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Success!</strong>  Thank you for submitting your challenge questions.  A confirmation email has been sent to your email with instructions on how to make sure you receive further communications from us.
+              </div>
+            </div>
+
+            <div id="formSubmitError" class="formSubmitStatus row mt30" style="display: none;">
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Something went wrong!</strong> See above for specific validation errors.
+              </div>
+            </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+	<div id="paralaxSlice4" data-stellar-background-ratio="0.5" style="background-image: url(https://www.thedataincubator.com/static/images/theme-pics/big-city-3a.jpg);">
+		<div class="maskParent">
+			<div class="paralaxMask"></div>
+
+			<div class="paralaxText">
+				<blockquote class="bigTitle">With loads of data you will find relationships that aren’t real.<br>Big data isn’t about bits,<br>it’s about talent.<br><small>Forbes Magazine</small></blockquote>
+			</div>
+		</div>
+	</div>
+
+		<!-- global wrapper -->
+		<!-- End Document
+		================================================== -->
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
+
+		
+<script type="text/x-mathjax-config;executed=true">
+	MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [['$','$'], ['\\(','\\)']],
+			processEscapes: true
+		},
+	});
+</script>
+<script type="text/javascript" src="./The Data Incubator_files/MathJax.js" defer=""></script>
+		<script type="text/javascript" src="./The Data Incubator_files/bootstrap-datepicker.js" defer=""></script>
+<script type="text/javascript" src="./The Data Incubator_files/application.js" defer=""></script>
+<style>
+	input::-webkit-inner-spin-button {
+	    /* display: none; <- Crashes Chrome on hover */
+	    -webkit-appearance: none;
+	    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+	}
+  /* .invalid class prevents CSS from automatically applying */
+  .invalid input:invalid {
+      background: #BE4C54;
+  }
+
+  /* Mark valid inputs during .invalid state */
+  .invalid input:valid {
+      background: #17D654 ;
+  }
+</style>
+
+	
+	<!-- Google Analytics -->
+	<!-- End Google Analytics -->
+
+
+<!-- plugin css  -->
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: MathJax_Main, sans-serif;"></div></div></body></html>
