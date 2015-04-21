@@ -1,0 +1,1 @@
+sed -i '' 's/[\s\S]*(</trafficStats>)/\n/g' *.xml;

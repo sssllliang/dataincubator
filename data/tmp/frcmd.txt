@@ -1,0 +1,35 @@
+[\s\S]*(<listingStats>)
+	
+	--> \n
+
+^(<type>\d{1} Bedroom Properties<\/type>\n)(.+\n){5}
+
+	--> \n
+
+(<listingStat>\n<weekEndingDate>)([0-9]+-[0-9]+-[0-9]+)(</weekEndingDate>\n<listingPrice>\n<subcategory>\n<type>All Properties</type>\n<numberOfProperties>)([0-9]+)(</numberOfProperties>\n<medianListingPrice>)([0-9]+)(</medianListingPrice>\n<averageListingPrice>)([0-9]+)(</averageListingPrice>\n</subcategory>\n<subcategory>)
+
+	--> \n$2\n$4\n$6\n$8\n
+
+
+
+</listingStat>
+
+
+
+
+</listingStats>
+</TruliaStats>
+</response>
+</TruliaWebServices>
+
+	-->
+
+(\d){1}\n
+	--> $1, 
+
+, \n
+	--> 
+
+,\n\n
+	--> \n
+
