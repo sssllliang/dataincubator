@@ -1,0 +1,21 @@
+.list-group-item {
+	border: 0px;
+}
+
+.form-horizontal .control-label.left-align {
+	text-align: left;
+}
+
+.error-text {
+  display: none;
+  color: red;
+  font-weight: bold;
+}
+
+.invalid {
+  border: 2px solid red;
+}
+
+.invalid-question {
+  border: 2px solid red;
+}

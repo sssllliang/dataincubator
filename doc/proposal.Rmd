@@ -1,0 +1,228 @@
+---
+title: "Data Incubator Project Proposal"
+author: "Robert Handsfield"
+date: "04/10/2015"
+output: html_document
+---
+
+Correlate natural disasters to housing prices/economic output (via global warming)
+
+Use: storm db by county, housing prices by county(trulia, zillow), economic activity by county
+
+1) Subset storm to housing price time period
+2) Look at most & least regions
+3) Check correlation between disaster frq and change in housing prices
+
+
+```{r}
+install.packages("data.table");
+library("data.table");
+library("dplyr");
+library("ggplot2");
+library("reshape");
+```
+
+
+```{r downloadSource, echo=TRUE, cache=TRUE}
+# Download the file
+fileUrl <-"https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2";
+
+if ( !("Stormdata.csv.bz2" %in% list.files()) ) {
+	download.file(fileUrl, destfile = "./Stormdata.csv.bz2", method = "curl" );
+}
+```  
+
+```{r}
+file <- "../datasciencecoursera/5-reproducibleResearch/courseProject2/Stormdata.csv.bz2";
+dfStorm <- read.csv(bzfile(file));
+```
+
+```{r}
+dt <- data.table(dfStorm);
+
+dt$BGN_DATE <- as.Date(dt$BGN_DATE, format= "%m/%d/%Y");
+
+#dt$BGN_DATE[1] < 2003;
+
+nrow( dt[BGN_DATE < 1980,] );
+
+# subset events that cause housing damage: tornado, flood, hurricane, wildfire
+storm.kind <- c(unique(dt$EVTYPE)[ grep("WILDFIRE", unique(dt$EVTYPE))],
+		unique(dt$EVTYPE)[ grep("TORNADO", unique(dt$EVTYPE))],
+		unique(dt$EVTYPE)[ grep("HURRICANE", unique(dt$EVTYPE))]
+		);
+
+```
+
+```{r}
+# subset events that cause housing damage: tornado, flood, hurricane, wildfire
+
+# create list of storm events
+storm.kind <- c(grep("FIRE", unique(dt$EVTYPE)),
+		grep("TORNADO", unique(dt$EVTYPE)),
+		grep("HURRICANE", unique(dt$EVTYPE)),
+		grep("FLOOD", unique(dt$EVTYPE))
+		);
+
+# convert indexes to names (factors)
+storm.kind <- unique(dt$EVTYPE)[storm.kind];
+
+dt <- dt[EVTYPE %in% storm.kind,];
+dt$EVTYPE <- factor(dt$EVTYPE); # remove extraneous factors
+
+# subset continental U.S.
+state.list <- c('AL', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY');
+
+dt <- dt[STATE %in% state.list];
+dt$STATE <- factor(dt$STATE); # remove extraneous factors
+
+# real estate data available from 2009
+dt <- dt[BGN_DATE > 2008];
+
+# create state.county factor
+dt$state.county <- paste(dt$STATE, dt$COUNTYNAME, sep=".");
+
+tbl <- table(dt$state.county)
+
+which(tbl == max(tbl));
+
+sort(tbl, decreasing=TRUE )[1:100];
+
+top100 <- names( sort(tbl, decreasing=TRUE )[1:100]);
+```
+
+Harris County TX (Houston) is a good candidate b/c of its neighbors are in the top 100. Compare housing prices by county to per-county baseline.
+
+Harris 2009-07-04 <-- all begin here
+
+Neighbors: *GALVESTON, CHAMBERS, LIBERTY, *MONTGOMERY, WALLER, FORT BEND, BRAZORIA
+```{r}
+neighbors <- c("GALVESTON", "CHAMBERS", "LIBERTY", "MONTGOMERY", "WALLER", "FORT BEND", "BRAZORIA");
+```
+
+
+```{r}
+# via lib XML
+
+url <- "http://api.trulia.com/webservices.php?library=TruliaStats&function=getCountyStats&county=Harris&state=TX&startDate=1950-01-03&endDate=2011-11-03&apikey=wwccxrp5983jhuaxj278fpbt";
+
+html <- htmlTreeParse(url, useInternalNodes=TRUE);
+
+xpathSApply(html, "//county", xmlValue);
+
+xpathSApply(html, "//numberOfProperties", xmlValue);
+
+harris <- data.table(read.csv("data/harris2.csv")[1:4]);
+harris$week.ending <- as.Date(harris$week.ending, format="%Y-%m-%d");
+
+re.harris <- data.frame(harris);
+
+tmp1 <- data.frame(re.harris$week.ending); 
+tmp1$value <-  re.harris$num.props;
+tmp1$measurement <- "properties listed";
+
+tmp2 <- data.frame(re.harris$week.ending);
+tmp2$value <-  re.harris$med.price;
+tmp2$measurement <- "median price";
+
+tmp3 <- data.frame(re.harris$week.ending);
+tmp3$value <-  re.harris$avg.price;
+tmp3$measurement <- "mean price";
+
+re.harris2 <- rbind(tmp1, tmp2, tmp3);
+names(re.harris2)[1] <- "week.ending";
+
+
+chambers <- data.table(read.csv("data/chambers2.csv")[1:4]);
+chambers$week.ending <- as.Date(chambers$week.ending, format="%Y-%m-%d");
+```
+
+```{r}
+
+
+g <- g + geom_point(aes(x=dt.harris.09$BGN_DATE, y=3e05));
+
+# subset to harris county
+dt.harris <- dt[state.county == "TX.HARRIS", ];
+
+# subset to 2009
+dt.harris.09 <- dt.harris[BGN_DATE > "2009-10-01",];
+ggplot(dt.harris) + aes(x=BGN_DATE) + geom_bar(stat="bin");
+
+ggplot(re.harris2) + aes(x=week.ending, y=value, color=measurement) + geom_line() + scale_fill_continuous(guide = "legend") + geom_point(aes(x = event[1], y=3e05), color="black") + 
+	geom_point(aes(x = event[2], y=3e05), color="black") +
+	geom_point(aes(x = event[3], y=3e05), color="black") +
+	geom_point(aes(x = event[4], y=3e05), color="black") +
+	geom_point(aes(x = event[5], y=3e05), color="black") +
+	geom_point(aes(x = event[6], y=3e05), color="black") +
+	geom_point(aes(x = event[7], y=3e05), color="black") +
+	geom_point(aes(x = event[8], y=3e05), color="black") +
+	geom_point(aes(x = event[9], y=3e05), color="black") +
+	geom_point(aes(x = event[10], y=3e05), color="black");
+
+ggplot(re.harris) + 
+	geom_line(aes(x=week.ending, y=num.props), color="green") + 
+	geom_line(aes(x=week.ending, y=med.price), color="red") + 
+	geom_line(aes(x=week.ending, y=avg.price), color="blue") + 
+	geom_point(aes(x = event[1], y=3e05)) + 
+	geom_point(aes(x = event[2], y=3e05)) +
+	geom_point(aes(x = event[3], y=3e05)) +
+	geom_point(aes(x = event[4], y=3e05)) +
+	geom_point(aes(x = event[5], y=3e05)) +
+	geom_point(aes(x = event[6], y=3e05)) +
+	geom_point(aes(x = event[7], y=3e05)) +
+	geom_point(aes(x = event[8], y=3e05)) +
+	geom_point(aes(x = event[9], y=3e05)) +
+	geom_point(aes(x = event[10], y=3e05));
+
+```
+
+By week, the number of listed properties is shown in green, the median listing price in red, and the average listing price in blue. Disasters- floods, tornadoes, etc, are plotted as black dots on the date they occurred.
+
+```{r}
+ggplot(chambers) + geom_line(aes(x=week.ending, y=num.props), color="green") + geom_line(aes(x=week.ending, y=med.price), color="red") + geom_line(aes(x=week.ending, y=avg.price), color="blue");
+```
+
+
+
+```{r}
+dt <- ( dt[BGN_DATE < 1980,] );
+```
+
+
+
+
+1) convert date factors to dates
+
+2) filter by year
+
+3) filter by month (storm season pricing?)
+
+4) Hyp: more storms = lower price (supply/demand)
+
+5) Cor vs time --> more cor, people learn
+
+
+Correlate social media mentions of Katrina to market volatility preceding hurricane Katrina
+
+
+Aug 23 2005 - Aug 31 2005
+
+Landfall Aug 25,29
+
+Timelines:
+http://news.nationalgeographic.com/news/2005/09/0914_050914_katrina_timeline.html
+https://en.wikipedia.org/wiki/Timeline_of_Hurricane_Katrina
+
+----------------------------------
+Problem: There are millions of mobile apps available in the stores. These apps are difficult to curate; search functions are poor, and people may not find an app they would use.
+
+Solution: Natural language processing of group chat in FB/Twitter to match group interests and activity to mobile applications.
+
+
+Data Sources:
+
+```{r}
+
+```
+
