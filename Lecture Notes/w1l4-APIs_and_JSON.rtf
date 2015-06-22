@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 APIs and JSON\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+Scraping is useful but a waste of time. You are undoing some programmer\'92s work of converting their data to html.\
+\
+APIs are much better. They often store things in JSON, which is an associative array.\
+\
+Python turns all JSONs into dictionaries.\
+\
+GET requests do not change server state, POST request do. For API usage, we should always use GET requests.\
+\
+*** Non-Public APIs\
+APIs stay private to avoid server overloading. These are 
+\b Authenticated APIs
+\b0 , which require you to pass in credentials\
+\
+\
+*** The request library\
+	Does _____ automatic formatting of GET results??\
+	See ?requests\
+\
+The ~/datacourse/secrets/twitter_secrets.json.nogit file has stubs for the twitter API??\
+\
+Python lib simplejson is terrible. Don\'92t use it.\
+\
+API outputs stream, which means serial, one at a time. Program iterators therefore are necessary for working with the output stream, one item at a time.\
+\
+\
+Numpy Scipy\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+scipy.optimize should solve linear regressions\
+\
+Whenever possible, substitute numpy ops for for loops.}

@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun 10 16:19:32 2015
+ml_q4_worker.py
 
 @author: rhmbp
 """
 
+from .. import ml_lib
+from TransformerQ4 import TransformerQ4
 
+X = ml_lib.lst_import_json()
 
 # import giulio's custom transformer
-t = transformer()
+t = TransformerQ4()
 X_trans = t.transform(X)
 
 # send transformed X into DictVectorizer (flattens more)

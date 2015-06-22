@@ -1,0 +1,166 @@
+# -*- coding: utf-8-*-
+from __future__ import unicode_literals
+
+from numbers import Number
+
+from lib import QuestionList, Question, TupleListValidateMixin, catch_validate_exception
+QuestionList.set_name("sql")
+
+"""
+The city of New York does restaurant inspections and assigns a grade.  Inspections data the last 4 years are available [here](https://s3.amazonaws.com/thedataincubator/coursedata/nyc_inspection_data.zip).
+
+The file `RI_Webextract_BigApps_Latest.xls` contains a description of each of the datafiles.  Take a look and then load the csv formatted `*.txt` files into Postgresql into five tables:
+1. `actions`
+2. `cuisines`
+3. `violations`
+4. `grades` (from `WebExtract.txt`)
+5. `boroughs` (from `RI_Webextract_BigApps_Latest.xls`)
+
+**Hints:**
+1. Postgresql has a [`\copy` command](http://www.postgresql.org/docs/9.2/static/app-psql.html#APP-PSQL-META-COMMANDS-COPY) that can both save and load files in various formats.  It is a convenience wrapper for the [`copy` command](http://www.postgresql.org/docs/9.2/static/sql-copy.html) but behaves better (e.g. relative paths).
+
+2. The files may contain malformatted text.  Unfortunately, this is all too common.  As a stop gap, remember that `iconv` is a unix utility that can convert files between different text encodings.
+
+3. For more sophisticated needs, a good strategy is to write simple python scripts that will reparse files.  For example, commas (',') within a single field will trick many csv parsers into breaking up the field.  Write a python script that converts these 'inadvertent' delimiters into semicolons (';').
+"""
+
+class GroupbyValidateMixin(TupleListValidateMixin):
+  @classmethod
+  def list_length(cls):
+    return cls._list_length
+
+  @classmethod
+  def tuple_validators(cls):
+    return (
+      cls.validate_string,
+      cls.validate_float,
+      cls.validate_float,
+      cls.validate_int
+    )
+
+
+@QuestionList.add
+class ScoreByZipcode(GroupbyValidateMixin, Question):
+  """
+  Return a list of tuples of the form
+  `(zipcode, mean grade, standard error, number of inspections)`
+  for each of the 183 zipcodes in the city with over 100 inspections.  You can read more about standard error on [wikipedia](http://en.wikipedia.org/wiki/Standard_error).  Sort the list in ascendig order by score.
+  """
+  _list_length = 183
+
+  def solution(self):
+    import csv
+    result = []
+
+    f = open('questions/1-week/sql/sql-Q1-ScoreByZipCode.csv', 'r')
+    csvr = csv.reader(f)
+
+    for line in csvr:
+        result.append(tuple(line))
+
+    tmp_result = []
+    for tpl in result:
+      tmp_tpl = (tpl[0], float(tpl[1]), float(tpl[2]), int(tpl[3]))
+      tmp_result.append(tmp_tpl)
+
+    result = tmp_result
+
+    #return result
+    return [('10112', 15.26842105263158, 0.693995220309327, 190), ('10020', 17.607703281027103, 0.47085663190163507, 701), ('10282', 18.094972067039105, 1.378104121937598, 179), ('11433', 18.10420168067227, 0.3937503004978114, 595), ('10307', 18.150990099009903, 0.5823136547146585, 404), ('11234', 18.945891783567134, 0.25604832325923876, 2495), ('10306', 19.015512465373963, 0.2828589800376872, 1805), ('11224', 19.079617834394906, 0.46514364068298597, 942), ('10044', 19.16030534351145, 1.1069532436928107, 131), ('10039', 19.261363636363637, 0.49113794015523327, 528), ('11692', 19.396946564885496, 0.9828643048993737, 131), ('11357', 19.508326724821572, 0.31362487468140204, 1261), ('11430', 19.5858475041141, 0.3187680000259557, 1823), ('10471', 19.674418604651162, 0.48139204903097593, 731), ('11379', 19.696938775510205, 0.3487380962828246, 980), ('10460', 19.90891089108911, 0.4612123752017939, 1010), ('11429', 19.92664092664093, 0.5490619454527277, 518), ('11361', 19.9583532790809, 0.29105793244399125, 2089), ('11228', 19.983505154639175, 0.39237481150580567, 970), ('10474', 20.01830985915493, 0.5226561347321848, 710), ('10302', 20.176781002638524, 0.349099145010574, 1137), ('11365', 20.22459893048128, 0.3980089262671853, 935), ('11360', 20.22630560928433, 0.5217537050918369, 517), ('11356', 20.334826427771556, 0.4760875730804635, 893), ('11249', 20.42841687702849, 0.22671217558477075, 2773), ('10004', 20.437789962041332, 0.2837610749631981, 2371), ('11207', 20.49662564509726, 0.24988585989803094, 2519), ('10065', 20.520122120455177, 0.20304604500546944, 3603), ('10301', 20.58128374325135, 0.3056089524492275, 1667), ('11369', 20.591995221027478, 0.3476264336104821, 1674), ('11217', 20.602597402597404, 0.20477839009819157, 4620), ('11427', 20.649595687331537, 0.8616398944090047, 371), ('11426', 20.653781512605043, 0.6031415717017046, 595), ('10472', 20.658988482724087, 0.31454120967643096, 1997), ('11209', 20.67450344548034, 0.20084707313483988, 4934), ('11375', 20.778710792788342, 0.19479410890463383, 4049), ('10459', 20.781407035175878, 0.3480436752225013, 1592), ('11412', 20.795580110497237, 0.5044973719285845, 724), ('10309', 20.81663974151858, 0.3547386471198212, 1238), ('10001', 20.871685002895195, 0.1617195402796402, 8635), ('10457', 20.87321063394683, 0.3780891376441074, 1467), ('11212', 20.901006711409394, 0.3287937901131971, 1788), ('10312', 20.987654320987655, 0.37925652197980336, 1215), ('11378', 21.01042873696408, 0.3057555013653713, 1726), ('10462', 21.021255060728745, 0.28238967609889487, 2964), ('10467', 21.025978191148173, 0.26363591840112277, 3118), ('10461', 21.051617593602327, 0.2949768757586037, 2751), ('11374', 21.059183673469388, 0.3120055170173742, 1960), ('11417', 21.113981762917934, 0.3896025365060561, 1316), ('10314', 21.118462507876497, 0.23519446186999862, 3174), ('11211', 21.11953919808498, 0.17200863586593387, 6684), ('10012', 21.13908087789499, 0.1434200701327378, 8247), ('10305', 21.16204002582311, 0.4264421355686066, 1549), ('11225', 21.174666006927264, 0.3050916316519782, 2021), ('10465', 21.199588477366255, 0.36454461348152484, 1458), ('10454', 21.208333333333332, 0.34899044045750904, 1632), ('10035', 21.23971631205674, 0.3734914091514651, 1410), ('10463', 21.24282828282828, 0.284972550775013, 2475), ('11364', 21.27355901189387, 0.4537916173390605, 1093), ('11237', 21.28735275883447, 0.23485884940129942, 3226), ('10281', 21.305732484076433, 1.4421917019394752, 157), ('11371', 21.321428571428573, 0.8815004845360045, 224), ('11231', 21.352941176470587, 0.27280036388845075, 2839), ('11421', 21.37215528781794, 0.33370103325793465, 1494), ('10030', 21.41496598639456, 0.6452901605384702, 588), ('10011', 21.42406657177269, 0.14280424064231853, 9133), ('10028', 21.427294117647058, 0.21007477230371951, 4250), ('10005', 21.432947019867548, 0.4377785895707317, 1208), ('11215', 21.440064794816415, 0.16514070468542566, 7408), ('10019', 21.450097847358123, 0.12934417589348657, 12264), ('10470', 21.524861878453038, 0.5235164184950095, 905), ('11363', 21.54920634920635, 0.7151889053760118, 315), ('10475', 21.556462585034012, 0.5566424324556919, 735), ('10007', 21.559110417479516, 0.2862123952935742, 2563), ('11103', 21.559838750314942, 0.2389545476294921, 3969), ('10014', 21.568042548271478, 0.14863282376191475, 8649), ('11233', 21.57314629258517, 0.5212591346744305, 998), ('10469', 21.581564245810057, 0.3458789713780619, 1790), ('11435', 21.60431947840261, 0.27801232032527545, 2454), ('11206', 21.61713357693869, 0.2973426358577977, 2463), ('10452', 21.666361136571954, 0.31414065754234227, 2182), ('11367', 21.672060409924487, 0.4686488220736411, 927), ('10466', 21.67934495509773, 0.32196891710784764, 1893), ('11105', 21.687824351297404, 0.2821655951457905, 2505), ('11210', 21.690582959641254, 0.38618849804837996, 1561), ('11205', 21.702141680395385, 0.25841192148699393, 3035), ('11238', 21.771921531552824, 0.2282765720039058, 4231), ('11203', 21.802495543672013, 0.27917220208853666, 2805), ('11101', 21.856084867894314, 0.20085039784940448, 4996), ('11366', 21.86171310629515, 0.5067155870754485, 969), ('11201', 21.90609287193138, 0.1794416078237022, 6762), ('10038', 21.91315703558603, 0.2673208858741836, 3063), ('10023', 21.917737789203084, 0.2407426023848199, 3890), ('11223', 21.928736295441432, 0.2741898525559516, 3466), ('11358', 21.96282930350054, 0.2720451164184876, 2771), ('10075', 21.989367088607594, 0.36841657485609247, 1975), ('11385', 21.996373161394317, 0.22553322428568218, 4963), ('10022', 22.01130691657329, 0.1556284147914667, 9817), ('10037', 22.024316109422493, 0.560190906413895, 658), ('10009', 22.028339483394834, 0.17816406815273086, 6775), ('10458', 22.050979339951702, 0.2411002216532925, 3727), ('11377', 22.060877555708707, 0.21334752677201832, 4353), ('10468', 22.104070305272895, 0.3814383527470564, 2162), ('11102', 22.105046948356808, 0.37559629181542437, 1704), ('10033', 22.113469387755103, 0.2825634039191742, 2450), ('11232', 22.130981150314163, 0.33956484044475294, 2069), ('11415', 22.148793565683647, 0.6158250435137141, 746), ('10304', 22.154054054054054, 0.3902426702888791, 1110), ('10310', 22.173281703775412, 0.40692033076901213, 1033), ('10308', 22.19402985074627, 0.515528676949799, 938), ('11219', 22.20180995475113, 0.30795290338363185, 2210), ('11434', 22.213095921883976, 0.36523873695836095, 1741), ('10453', 22.252642174131857, 0.32870505309341863, 1987), ('10006', 22.255632582322356, 0.39778206789429366, 1154), ('10040', 22.257045260461144, 0.4962225136639787, 1171), ('10119', 22.280701754385966, 0.662744099529464, 399), ('10024', 22.28198555115358, 0.22818208247430674, 4291), ('11229', 22.286210489753387, 0.27745883277860445, 2879), ('11414', 22.318267419962336, 0.4539341444651954, 1062), ('10034', 22.320117474302496, 0.29533183476123265, 2043), ('10456', 22.331319234642496, 0.34071715835173033, 1986), ('11222', 22.337138084632517, 0.2481844471521246, 3592), ('11432', 22.372652737371066, 0.26407898813058667, 3781), ('10451', 22.392642377078175, 0.3082758195361355, 2827), ('11106', 22.398936170212767, 0.27155200059846135, 3196), ('11204', 22.407027240426373, 0.30276710948674407, 2533), ('11236', 22.41873417721519, 0.36638144777889, 1975), ('10036', 22.437559996509293, 0.14424607359425695, 11459), ('10017', 22.44653594771242, 0.16923535022190264, 7650), ('11221', 22.51013698630137, 0.41329084119313514, 1825), ('10003', 22.513680430879713, 0.12741009997965713, 13925), ('10031', 22.552121529596647, 0.33602076789031676, 1909), ('11420', 22.581786542923435, 0.39480592942883913, 1724), ('10021', 22.65847883989346, 0.2693395536737962, 3379), ('11418', 22.668074834037416, 0.3835913888592634, 1657), ('11104', 22.714285714285715, 0.2963414214101212, 2443), ('11413', 22.726153846153846, 0.6631055968381315, 650), ('10010', 22.73048780487805, 0.22872239500209693, 4920), ('10455', 22.753080082135522, 0.4048891265203915, 1948), ('11422', 22.754901960784313, 0.519615503281114, 816), ('11004', 22.757774140752865, 0.7112290576775235, 611), ('10027', 22.778005464480874, 0.29380289426127343, 2928), ('10016', 22.788999783033194, 0.15322377201447995, 9218), ('11423', 22.848821081830792, 0.6216333605428069, 721), ('10464', 22.85034013605442, 0.5562229156456195, 735), ('11694', 22.871915393654525, 0.46383711143060713, 851), ('11208', 22.89616858237548, 0.29215146823052995, 2610), ('11213', 22.95972073039742, 0.37932871177935934, 1862), ('10018', 22.9769000427777, 0.18430456870955372, 7013), ('11239', 23.017857142857142, 1.229927900916062, 168), ('10128', 23.185957696827263, 0.2708461840015811, 3404), ('11235', 23.254340542187023, 0.2962979088707535, 3283), ('11040', 23.276967930029155, 0.8083049734703903, 343), ('11216', 23.27993966817496, 0.27279775630328595, 3315), ('11416', 23.29491173416407, 0.5616469278572909, 963), ('10303', 23.30955414012739, 0.5783950044205212, 785), ('10103', 23.362745098039216, 2.5102310246788053, 102), ('10025', 23.387863315003926, 0.21483065975880955, 5092), ('11368', 23.5567112431897, 0.2075687147355854, 6057), ('11436', 23.56414762741652, 0.6375986646325913, 569), ('10029', 23.705243644067796, 0.2805184045179718, 3776), ('10032', 23.731099656357387, 0.35569817072630056, 2328), ('11214', 23.73961218836565, 0.26634220425846283, 3610), ('11693', 23.781857451403887, 0.7333303825917884, 463), ('11218', 23.80806502031885, 0.28492998154054866, 3199), ('10013', 23.924642512501098, 0.150691921078658, 11399), ('11230', 24.02169197396963, 0.3371524357334663, 2305), ('11370', 24.05709624796085, 0.727649006653304, 613), ('10280', 24.067307692307693, 1.292783777117144, 208), ('11419', 24.146455223880597, 0.3736008241162361, 2144), ('11372', 24.170565045992117, 0.19523102958820732, 7610), ('10002', 24.30059892606361, 0.1722413039880891, 9684), ('10026', 24.323741007194243, 0.4302613243361538, 1390), ('11226', 24.339778354161755, 0.2670687233818181, 4241), ('11373', 24.466032608695652, 0.22497640452030576, 5152), ('11691', 24.753635585970915, 0.435037666679909, 1169), ('11355', 24.814897413024084, 0.2359186278877703, 4484), ('11428', 25.256768558951965, 0.4710335677559537, 1145), ('11362', 25.33622350674374, 0.5863028379046786, 1038), ('11220', 25.8737876802097, 0.19868284166420208, 7630), ('10473', 25.97610062893082, 0.7208146517639152, 795), ('11411', 25.977358490566036, 0.7420435002075897, 530), ('11354', 26.46201009858139, 0.2104747517610811, 8318)]
+#    return [("11201", 21.9060928719313812, 0.179441607823702, 6762)] * 183
+
+
+@QuestionList.add
+class ScoreByMap(Question):
+  """
+  The above are not terribly enlightening.  Use [CartoDB](http://cartodb.com/) to produce a map of average scores by zip code.  You can sign up for a free trial.
+
+  You will have to use their wizard to plot the data by [zipcode](http://docs.cartodb.com/cartodb-editor.html#geocoding-data).  Then use the "share" button to return a link to a short URL beginning with "http://cdb.io/".
+
+  **For fun:** How do JFK, Connie Island, Brighton Beach, Liberty Island (home of the Statue of Liberty), Financial District, Chinatown, and Coney Island fare?
+  """
+  def solution(self):
+    #return "http://cdb.io/....."
+    return "http://cdb.io/1MAI5H2"
+    #return "http://cdb.io/1Jsd6yG"
+
+
+  @catch_validate_exception
+  def validate(self):
+    solution = self.solution()
+    if not isinstance(solution, basestring):
+      return "Expected a string but got %.50s" % str(solution)
+
+    if not solution.startswith("http://cdb.io/"):
+      return "Expected a cartodb link that starts with http://cdb.io"
+
+    return None
+
+
+@QuestionList.add
+class ScoreByBorough(GroupbyValidateMixin, Question):
+  """
+  Return a list of tuples of the form
+  `(borough, mean grade, stderr, number of inspections)`
+  for each of the city's five boroughs.  **Hint**: you will have to perform a join with the `boroughs` table.  Sort the list in ascendig order by score.
+  `
+  """
+  _list_length = 5
+
+  def solution(self):
+    return [('MANHATTAN', 16.521905607944969, 0.047180507167291726, 68850), ('THE BRONX', 15.886506103596172, 0.098311347773936464, 15964), ('BROOKLYN', 16.524012058837243, 0.062978487738630115, 39918), ('QUEENS', 16.909119826578291, 0.064472174728081588, 38372), ('STATEN ISLAND', 16.24609375, 0.15306860516756407, 5602)]
+
+    #return[('STATEN ISLAND', 20.965332669446692, 0.10699358403989045, 16067), ('THE BRONX', 21.57383198069752, 0.07117002442611667, 45590), ('BROOKLYN', 22.18173948074434, 0.044390664939776205, 116667), ('MANHATTAN', 22.259562493258944, 0.033273956457904104, 203974), ('QUEENS', 22.687262825776894, 0.045650465419083394, 115685)] 
+    #return [("MANHATTAN", 22.2375933589636849, 0.0332739265922062, 204185)] * 5
+
+
+@QuestionList.add
+class ScoreByCuisine(GroupbyValidateMixin, Question):
+  """
+  Return a list of the 75 tuples of the form
+  `(cuisine, mean grade, stderr, number of inspections)`
+  for each of the 75 cuisine types with at least 100 inspections.  **Hint**: you will have to perform a join with the `boroughs` table.  Sort the list in ascendig order by score.  Are the least sanitary and most sanitary cuisine types surprising?
+  """
+  _list_length = 75
+
+  def solution(self):
+    #return [("French", 21.9985734664764622, 0.177094690841052, 7010)] * 75
+    return [('Soups & Sandwiches', 15.284684684684684, 0.40745891309768917, 555), ('Ethiopian', 15.4, 0.4232611341065574, 285), ('Donuts', 15.691132514114912, 0.14355958610217517, 6022), ('Ice Cream; Gelato; Yogurt; Ices', 16.236750145602795, 0.19527054955560214, 3434), ('Sandwiches', 16.65240216353802, 0.14544341922861506, 6286), ('Hotdogs', 16.73975903614458, 0.4190052686352232, 415), ('Hotdogs/Pretzels', 16.77777777777778, 1.0270884246378498, 135), ('Juice; Smoothies; Fruit Salads', 17.303500397772474, 0.2382229091397413, 2514), ('Cafe/Coffee/Tea', 17.33534979716746, 0.10353847040642862, 14051), ('Armenian', 17.38488576449912, 0.40659032790979144, 569), ('Sandwiches/Salads/Mixed Buffet', 17.45603831679781, 0.22135832730053648, 2923), ('Cajun', 17.527272727272727, 0.5707558839910408, 165), ('Hamburgers', 17.639891818796485, 0.13218854237720953, 7395), ('Other', 17.878417684700405, 0.36842014593720446, 1719), ('Bottled beverages; including water; sodas; juices; etc.', 18.26293995859213, 0.4038312071938253, 966), ('Egyptian', 18.54193548387097, 0.6230174095024664, 310), ('English', 18.822222222222223, 0.5791689775218916, 315), ('Southwestern', 19.411458333333332, 0.6814693614612889, 192), ('Chicken', 19.459831018187025, 0.15323291445247425, 6983), ('Scandinavian', 20.083333333333332, 0.8222160534429127, 144), ('Salads', 20.395872420262663, 0.6000743808117548, 533), ('Middle Eastern', 20.424150689539186, 0.273697256705336, 2973), ('German', 20.622166246851386, 0.3736576691777986, 794), ('Czech', 20.73949579831933, 1.1462902012976184, 119), ('Greek', 20.799011532125206, 0.2750290773483418, 2428), ('Irish', 20.90432098765432, 0.20300881127560116, 4212), ('Tex-Mex', 20.977777777777778, 0.28890741367471506, 2700), ('Vegetarian', 21.039236479321314, 0.34370370500869313, 1886), ('Pancakes/Waffles', 21.058227848101264, 0.6877344022056866, 395), ('Barbecue', 21.10443864229765, 0.45241047925791705, 766), ('Moroccan', 21.12213740458015, 0.888739736641409, 262), ('Bagels/Pretzels', 21.17150170648464, 0.2332519743688068, 3516), ('Polish', 21.283211678832117, 0.45044017622659305, 685), ('Pizza', 21.485467849405225, 0.0917044452476173, 24463), ('American', 21.531987614422768, 0.04167616565315058, 118202), ('Mediterranean', 21.680399181166838, 0.24786376531518903, 3908), ('Steak', 21.825984714873602, 0.38948133764698134, 1701), ('Filipino', 21.850277264325324, 0.5388350714882972, 541), ('Indonesian', 22.071770334928228, 0.8109925704488002, 209), ('French', 22.108817204301076, 0.17700008692824765, 6975), ('Continental', 22.120171673819744, 0.4519025822837339, 932), ('Tapas', 22.175276752767527, 0.6658770183352911, 542), ('Pizza/Italian', 22.269844396297025, 0.13962677628694495, 10154), ('Italian', 22.27919745696239, 0.09308052185517872, 24223), ('Afghan', 22.32234432234432, 0.8303785719600014, 273), ('Australian', 22.450216450216452, 1.126024451380964, 231), ('Turkish', 22.765229295003422, 0.4002219631406073, 1461), ('Jewish/Kosher', 22.775679029367158, 0.17328636186793842, 7253), ('Seafood', 22.961827079934746, 0.2972357649745715, 3065), ('Eastern European', 23.16414686825054, 0.39897391654381287, 1389), ('Brazilian', 23.165594855305468, 0.5046037587528238, 622), ('Bakery', 23.211185363005256, 0.12982982305850724, 15413), ('Not Listed/Not Applicable', 23.24778761061947, 1.841907977018551, 113), ('Caribbean', 23.257749413909874, 0.12639933534343095, 15356), ('Mexican', 23.37473393545418, 0.11257200145635665, 17383), ('Soul Food', 23.559063136456214, 0.455431211369627, 982), ('Spanish', 23.6411394448031, 0.13931785427938093, 12392), ('Thai', 23.675192977145453, 0.17665160525840953, 6607), ('Russian', 23.688936397648316, 0.39188331178531777, 1871), ('Japanese', 23.91336971350614, 0.11435372443564472, 17592), ('Vietnamese/Cambodian/Malaysia', 24.491277433877322, 0.37211363256686447, 1777), ('Latin (Cuban; Dominican; Puerto Rican; South & Central American)', 24.57812310307151, 0.10272516644007774, 24711), ('Delicatessen', 24.596930445194296, 0.16240291233015655, 9187), ('Korean', 24.656693865216077, 0.1950939895588563, 6618), ('Peruvian', 24.920441988950277, 0.397171888859416, 1810), ('Chinese', 24.998865867695848, 0.06813733591900976, 59076), ('Indian', 25.219605346912793, 0.20239802128129775, 7855), ('Pakistani', 25.62468193384224, 0.6415037109664654, 786), ('Asian', 26.1993423756679, 0.21557703738491435, 7299), ('Chinese/Japanese', 26.351630867143992, 0.456102002688526, 1257), ('Portuguese', 26.685714285714287, 1.1079022099407367, 245), ('Bangladeshi', 26.75839793281654, 0.6538881578719451, 774), ('African', 26.854084507042252, 0.454961099306718, 1775), ('Chinese/Cuban', 27.554502369668246, 0.8205500438286929, 422), ('Creole', 30.37557251908397, 0.8279351395935985, 655)]
+
+
+
+@QuestionList.add
+class ViolationByCuisine(TupleListValidateMixin, Question):
+  """
+  Which cuisines tend to have a disproportionate number of what which violations?  Answering this question isn't easy becuase you have to think carefully about normalizations.
+
+  1. More popular cuisine categories will tend to have more violations just becuase they represent more restaurants.
+
+  2. Similarly, some violations are more common.  For example, knowing that "Equipment not easily movable or sealed to floor" is a common violation for Chinese restuarants is not particularly helpful when it is a common violation for all restaurants.
+
+  The right quantity is to look at is the conditional probability of a specific type of violation given a specific cuisine type and divide it by the unconditional probability of the violation for the entire population.  Taking this ratio gives the right answer.  Return the 20 highest ratios.
+
+  **Hint**:
+  1. You might want to check out this [Stackoverflow post](http://stackoverflow.com/questions/972877/calculate-frequency-using-sql).
+
+  2. The definition of a violation changes with time.  For example, 10A can mean two different things "Toilet facility not maintained ..." or "Vermin or other live animal present ..." when things were prior to 2003.
+
+  3. The ratios don't mean much when the number of violations of a given type and for a specific category are not large (why not?).  Be sure to filter these out.  We chose 100 as our cutoff.
+  """
+  def solution(self):
+    #return [(("Café/Coffee/Tea", "Toilet facility not maintained and provided with toilet paper; waste receptacle and self-closing door."), 1.8836420929815939, 315)] * 20
+    return [(('Japanese' ,    'Food worker does not use proper utensil to eliminate bare hand contact with food that will not receive adequate additional heat treatment.') ,   3.2441362822892623 ,   541) ,  (('Cafe/Coffee/Tea' ,    '?Choking first aid? poster not posted. ?Alcohol and pregnancy? warning sign not posted. Resuscitation equipment: exhaled air resuscitation masks (adult & pediatric); latex gloves; sign not posted. Inspection report sign not posted.') ,   3.1528179028256873 ,   175) ,  (('Juice; Smoothies; Fruit Salads' ,    'Food Protection Certificate not held by supervisor of food operations.') ,   3.089540687389437 ,   145) ,  (('Donuts' ,    'Accurate thermometer not provided in refrigerated or hot holding equipment.') ,   3.0372675010032575 ,   130) ,  (('Ice Cream; Gelato; Yogurt; Ices' ,    'Food Protection Certificate not held by supervisor of food operations.') ,   2.955915077202543 ,   193) ,  (('Thai', 'Thawing procedures improper.'), 2.6329639915169523, 151) ,  (('Irish' ,    'Raw; cooked or prepared food is adulterated; contaminated; cross-contaminated; or not discarded in accordance with HACCP plan.') ,   2.3692776671873292 ,   321) ,  (('Mexican' ,    'Food not cooled by an approved method whereby the internal product temperature is reduced from 140? F to 70? F or less within 2 hours; and from 70? F to 41? F or less within 4 additional hours.') ,   2.326052280906961 ,   260) ,  (('Indian' ,    'Food not cooled by an approved method whereby the internal product temperature is reduced from 140? F to 70? F or less within 2 hours; and from 70? F to 41? F or less within 4 additional hours.') ,   2.2589579040329704 ,   112) ,  (('Chinese', 'Thawing procedures improper.'), 2.1970780297163146, 1121) ,  (('Caribbean' ,    'Food not cooled by an approved method whereby the internal product temperature is reduced from 140? F to 70? F or less within 2 hours; and from 70? F to 41? F or less within 4 additional hours.') ,   2.1084024687475433 ,   206) ,  (('Hamburgers' ,    'Accurate thermometer not provided in refrigerated or hot holding equipment.') ,   2.094665454794532 ,   109) ,  (('Soups & Sandwiches' ,    'Cold food item held above 41? F (smoked fish and reduced oxygen packaged foods above 38 ?F) except during necessary preparation.') ,   2.0913996437673843 ,   106) ,  (('Chinese' ,    'Food worker does not wash hands thoroughly after using the toilet; coughing; sneezing; smoking; eating; preparing raw foods or otherwise contaminating hands.') ,   2.086547637340511 ,   121) ,  (('American ' ,    "No Smoking? and/or 'Smoking Permitted? sign not conspicuously posted. Health warning not present on 'Smoking Permitted?") ,   2.0799162994455997 ,   227) ,  (('Donuts' ,    'Bulb not shielded or shatterproof; in areas where there is extreme heat; temperature changes; or where accidental contact may occur.') ,   2.0648726114523392 ,   110) ,  (('Middle Eastern' ,    'Food Protection Certificate not held by supervisor of food operations.') ,   1.9850211288862059 ,   117) ,  (('Spanish' ,    'Food not cooled by an approved method whereby the internal product temperature is reduced from 140? F to 70? F or less within 2 hours; and from 70? F to 41? F or less within 4 additional hours.') ,   1.9008571138466894 ,   151) ,  (('Hamburgers' ,    'Filth flies or food/refuse/sewage-associated (FRSA) flies present in facility?s food and/or non-food areas. Filth flies include house flies; little house flies; blow flies; bottle flies and flesh flies. Food/refuse/sewage-associated flies include fruit flies; drain flies and Phorid flies.') ,   1.895621611626516 ,   600) ,  (('Cafe/Coffee/Tea' ,    'Toilet facility not maintained and provided with toilet paper; waste receptacle and self-closing door.') ,   1.8836203887018317 ,   315)]
+
+  @classmethod
+  def list_length(cls):
+    return 20
+
+  @classmethod
+  def tuple_validators(cls):
+    return (
+      cls.validate_tuple,
+      cls.validate_float,
+      cls.validate_int,
+    )
+
+

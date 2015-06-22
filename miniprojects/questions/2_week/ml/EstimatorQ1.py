@@ -5,9 +5,12 @@ Created on Mon Jun  8 15:07:54 2015
 
 @author: rhmbp
 """
+import os
 from sklearn import base
 
 class EstimatorQ1(base.BaseEstimator, base.ClassifierMixin):
+    #__module__ = '/home/vagrant/miniprojects/questions/2_week/ml'
+    __module__ = os.path.splitext(os.path.basename(__file__))[0]  ### look here ###
     def __init__(self):
         # initialization code
         return

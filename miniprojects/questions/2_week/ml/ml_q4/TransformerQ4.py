@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 10 16:36:40 2015
-
-@author: rhmbp
-"""
-from sklearn import base
-import collections
-
+from __future__ import unicode_literals
 class TransformerQ4(base.BaseEstimator, base.TransformerMixin):
    def __init__(self):
        return
    # initialization code
 
-   def ColumnSelectJSONTransform(self, jsonlist, list_colnames):
+   def columnSelectJsonTransform(self, jsonlist, list_colnames):
        """ """
        selected_dict = []
        for x in jsonlist:
@@ -20,14 +13,14 @@ class TransformerQ4(base.BaseEstimator, base.TransformerMixin):
        selected_dict_transformed = self.JSONTransform(selected_dict)
        return selected_dict_transformed
 
-   def JSONTransform(self, jsonlist):
+   def jsonTransform(self, jsonlist):
        """ """
        UnfoldedJSON=[self.flattelists(self.flatten(jsondict)) for jsondict in jsonlist]
        return UnfoldedJSON
 
 
    def flattelists(self, unfldict):
-       """Converts a dict with lists in values to a dict in which every list 
+      """Converts a dict with lists in values to a dict in which every list 
        element is converted to a new k:v pair (bool True if it exists)
        IN: A single python dict
        OUT:A single python dict"""
@@ -71,7 +64,7 @@ class TransformerQ4(base.BaseEstimator, base.TransformerMixin):
       return totaldict                         
    
    def flatten(self, d, parent_key='', sep='_'):
-       """Converts a nested dict to a flat dict in which the nested dicts are converted to 
+      """Converts a nested dict to a flat dict in which the nested dicts are converted to 
        multi-element lists 
        IN: a python dict with nested dicts
        OUT: a single python dict"""
